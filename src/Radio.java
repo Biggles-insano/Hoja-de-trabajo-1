@@ -3,7 +3,7 @@ public class Radio implements IRadio {
     boolean state, AMFM; // true = AM , false = FM
     float frequencyAM=530, frequencyFM=87.9f;
     int button;
-    int[12] botones = [1,2,3,4,5,6,7,8,9,10,11,12];
+    float[] botones = new float[12];
 
     @Override
     public boolean getState() {
@@ -71,7 +71,11 @@ public class Radio implements IRadio {
 
     @Override
     public void setFavFrequency(int button) {
-        
+        if(button>=1 && button<=botones.length){
+            botones[button] = getCurrentFrequency();
+        }else{
+            System.out.println("La posición ingresada no es válida. Debe estar en el rango de 0 a 11.");
+        }
     }
 
     @Override

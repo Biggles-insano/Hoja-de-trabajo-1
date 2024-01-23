@@ -29,13 +29,13 @@ public class Radio implements IRadio {
     @Override
     public void nextFrequency() {
         if (AMFM) { //TRUE sería AM
-            if (frequencyAM<=1610) {
+            if (frequencyAM<1610) {
                 frequencyAM += 10; 
             }else{
                 frequencyAM=530;
             }
         }else{ //FALSE sería FM
-            if (frequencyFM<=107.9) {
+            if (frequencyFM<107.9) {
                 frequencyFM += 0.2; 
             }else{
                 frequencyFM=87.9f;
@@ -46,13 +46,13 @@ public class Radio implements IRadio {
     @Override
     public void previousFrequency() {        
         if (AMFM) { //TRUE sería AM
-            if (frequencyAM>=530) {
+            if (frequencyAM>530) {
                 frequencyAM -= 10; 
             }else{
                 frequencyAM=1610;
             }
         }else{ //FALSE sería FM
-            if (frequencyFM>=87.9f) {
+            if (frequencyFM>87.9f) {
                 frequencyFM -= 0.2f; 
             }else{
                 frequencyFM=107.9f;
@@ -71,16 +71,21 @@ public class Radio implements IRadio {
 
     @Override
     public void setFavFrequency(int button) {
-        if(button>=1 && button<=botones.length){
+        if(button>=0 && button<botones.length){
             botones[button] = getCurrentFrequency();
         }else{
             System.out.println("La posición ingresada no es válida. Debe estar en el rango de 0 a 11.");
         }
     }
 
-    // @Override
-    // public float getFavFrequency(int button) {
-        
-    // }
+    @Override
+    public float getFavFrequency(int button) {
+        if (button >= 0 && button < botones.length) {
+            return botones[button];
+        } else {
+            return -1;
+        }
+    }
+    
     
 }

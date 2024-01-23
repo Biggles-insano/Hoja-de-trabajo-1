@@ -55,19 +55,69 @@ public class RadioTest {
     }
 
     @Test
-    public void testNextFrequency() {
-
+    public void testNextFrequencyFM() {
+        radio.nextFrequency();
+        assertEquals(88.1f, radio.getCurrentFrequency(),0.001);
     }
 
     @Test
-    public void testPreviousFrequency() {
-
+    public void testPreviousFrequencyFM() {        
+        radio.previousFrequency();
+        assertEquals(107.9f, radio.getCurrentFrequency(),0.001);
     }
 
     @Test
-    public void testSetFavFrequency() {
-
+    public void testNextFrequencyAM() {
+        radio.toogleAMFM();
+        radio.nextFrequency();
+        assertEquals(540, radio.getCurrentFrequency(),0.1);
     }
 
+    @Test
+    public void testPreviousFrequencyAM() {  
+        radio.toogleAMFM();      
+        radio.previousFrequency();
+        assertEquals(1610, radio.getCurrentFrequency(),0.001);
+    }
+
+    @Test
+    public void testSetFavFrequencyFM() {
+        int button = 5; 
+        radio.previousFrequency();
+        radio.setFavFrequency(button);
+        assertEquals(radio.getCurrentFrequency(), radio.getFavFrequency(button), 0.001);
+    }
+
+    @Test
+    public void testSetFavFrequencyAM() {
+        int button = 5; 
+        radio.toogleAMFM();
+        radio.previousFrequency();
+        radio.setFavFrequency(button);
+        assertEquals(radio.getCurrentFrequency(), radio.getFavFrequency(button), 0.001);
+    }
+
+    @Test
+    public void testGetFavFrequencyFM() {
+        radio.previousFrequency();
+        radio.setFavFrequency(2);
+        int botonValido = 2;
+        float frecuenciaEsperada = 107.9f;
+        float frecuenciaObtenida = radio.getFavFrequency(botonValido);
+        assertEquals(frecuenciaEsperada, frecuenciaObtenida, 0.001);
+    
+    }
+
+    @Test
+    public void testGetFavFrequencyAM() {
+        radio.toogleAMFM();
+        radio.previousFrequency();
+        radio.setFavFrequency(2);
+        int botonValido = 2;
+        float frecuenciaEsperada = 1610;
+        float frecuenciaObtenida = radio.getFavFrequency(botonValido);
+        assertEquals(frecuenciaEsperada, frecuenciaObtenida, 0.1);
+    
+    }
 
 }

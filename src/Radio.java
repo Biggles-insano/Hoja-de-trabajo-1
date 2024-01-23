@@ -1,9 +1,9 @@
 public class Radio implements IRadio {
 
-    boolean state, AMFM; // true = AM , false = FM
-    float frequencyAM=530, frequencyFM=87.9f;
-    int button;
-    float[] botones = new float[12];
+    private boolean state, AMFM; // true = AM , false = FM
+    private float frequencyAM = 530, frequencyFM = 87.9f;
+    private int button;
+    private float[] botones = new float[12];
 
     @Override
     public boolean getState() {
@@ -15,65 +15,69 @@ public class Radio implements IRadio {
         return AMFM;
     }
 
-
     @Override
     public void tooglePowerOffOn() {
         state = !state;
+        if (state) {
+            System.out.println("Radio encendido.");
+        } else {
+            System.out.println("Radio apagado.");
+        }
     }
 
     @Override
     public void toogleAMFM() {
         AMFM = !AMFM;
+        System.out.println("Banda cambiada a: " + (AMFM ? "AM" : "FM"));
     }
 
     @Override
     public void nextFrequency() {
-        if (AMFM) { //TRUE sería AM
-            if (frequencyAM<1610) {
-                frequencyAM += 10; 
-            }else{
-                frequencyAM=530;
+        if (AMFM) { // TRUE sería AM
+            if (frequencyAM < 1610) {
+                frequencyAM += 10;
+            } else {
+                frequencyAM = 530;
             }
-        }else{ //FALSE sería FM
-            if (frequencyFM<107.9) {
-                frequencyFM += 0.2; 
-            }else{
-                frequencyFM=87.9f;
+        } else { // FALSE sería FM
+            if (frequencyFM < 107.9) {
+                frequencyFM += 0.2;
+            } else {
+                frequencyFM = 87.9f;
             }
         }
+        displayCurrentInfo();
     }
 
     @Override
-    public void previousFrequency() {        
-        if (AMFM) { //TRUE sería AM
-            if (frequencyAM>530) {
-                frequencyAM -= 10; 
-            }else{
-                frequencyAM=1610;
+    public void previousFrequency() {
+        if (AMFM) { // TRUE sería AM
+            if (frequencyAM > 530) {
+                frequencyAM -= 10;
+            } else {
+                frequencyAM = 1610;
             }
-        }else{ //FALSE sería FM
-            if (frequencyFM>87.9f) {
-                frequencyFM -= 0.2f; 
-            }else{
-                frequencyFM=107.9f;
+        } else { // FALSE sería FM
+            if (frequencyFM > 87.9) {
+                frequencyFM -= 0.2;
+            } else {
+                frequencyFM = 107.9f;
             }
         }
+        displayCurrentInfo();
     }
 
     @Override
     public float getCurrentFrequency() {
-        if (AMFM) { //TRUE sería AM
-            return frequencyAM;
-        }else{ //FALSE sería FM
-            return frequencyFM;
-        }
+        return AMFM ? frequencyAM : frequencyFM;
     }
 
     @Override
     public void setFavFrequency(int button) {
-        if(button>=0 && button<botones.length){
+        if (button >= 0 && button < botones.length) {
             botones[button] = getCurrentFrequency();
-        }else{
+            System.out.println("Frecuencia guardada en el botón " + button + ": " + getCurrentFrequency());
+        } else {
             System.out.println("La posición ingresada no es válida. Debe estar en el rango de 0 a 11.");
         }
     }
@@ -86,6 +90,12 @@ public class Radio implements IRadio {
             return -1;
         }
     }
-    
-    
+
+    private void displayCurrentInfo() {
+        System.out.println("Frecuencia actual: " + getCurrentFrequency() + ", Banda: " + (AMFM ? "AM" : "FM"));
+    }
+
+    public void displayCurrentStation() {
+        System.out.println("Emisora actual: " + getCurrentFrequency() + ", Banda: " + (AMFM ? "AM" : "FM"));
+    }
 }

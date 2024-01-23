@@ -21,7 +21,10 @@ public class RadioMain {
                     radio.tooglePowerOffOn();
                     System.out.println("Estado del radio: " + (radio.getState() ? "Encendido" : "Apagado"));
                     subContinuar = true;
-                    while (subContinuar) {
+                    while (subContinuar) {                                
+                        System.out.println("Banda actual: " + (radio.getStateAMFM() ? "AM" : "FM"));
+                        System.out.println("-------------------------------------------------------");
+
                         System.out.println("1. Cambia de AM a FM a AM");
                         System.out.println("2. Avanzar en el dial de las emisoras. Al llegar al final del dial inicia nuevamente.");
                         System.out.println("3. Retroceder en el dial de las emisoras. Al llegar al inicio del dial inicia nuevamente.");
@@ -34,19 +37,22 @@ public class RadioMain {
 
                         switch (opcion) {
                             case 1:
-                                radio.toogleAMFM();
                                 System.out.println("Banda actual: " + (radio.getStateAMFM() ? "AM" : "FM"));
+                                radio.toogleAMFM();
                                 subContinuar = volverAlMenu(scanner, " al menú? ", radio);
                                 break;
 
                             case 2:
-                                radio.nextFrequency();
                                 System.out.println("Frecuencia actual: " + radio.getCurrentFrequency());
+                                radio.nextFrequency();                                
+                                subContinuar = volverAlMenu(scanner, " al menú? ", radio);
+
                                 break;
 
                             case 3:
-                                radio.previousFrequency();
                                 System.out.println("Frecuencia actual: " + radio.getCurrentFrequency());
+                                radio.previousFrequency();
+                                subContinuar = volverAlMenu(scanner, " al menú? ", radio);
                                 break;
 
                             case 4:

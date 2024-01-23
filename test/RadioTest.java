@@ -2,14 +2,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-
-
 public class RadioTest {
     IRadio radio =  new Radio();
 
     @Test
     public void testGetStateFalse() {
-
+        
         assertEquals(false, radio.getState());
         
     }

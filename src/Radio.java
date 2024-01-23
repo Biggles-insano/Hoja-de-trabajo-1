@@ -2,7 +2,6 @@ public class Radio implements IRadio {
 
     private boolean state, AMFM; // true = AM , false = FM
     private float frequencyAM = 530, frequencyFM = 87.9f;
-    private int button;
     private float[] botones = new float[12];
 
     @Override
@@ -40,8 +39,8 @@ public class Radio implements IRadio {
                 frequencyAM = 530;
             }
         } else { // FALSE sería FM
-            if (frequencyFM < 107.9) {
-                frequencyFM += 0.2;
+            if (frequencyFM < 107.9f) {
+                Math.round(frequencyFM += 0.2);
             } else {
                 frequencyFM = 87.9f;
             }
@@ -58,8 +57,8 @@ public class Radio implements IRadio {
                 frequencyAM = 1610;
             }
         } else { // FALSE sería FM
-            if (frequencyFM > 87.9) {
-                frequencyFM -= 0.2;
+            if (frequencyFM > 87.9f) {
+                Math.round(frequencyFM -= 0.2);
             } else {
                 frequencyFM = 107.9f;
             }

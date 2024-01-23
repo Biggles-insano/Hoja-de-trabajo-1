@@ -65,6 +65,15 @@ public class RadioMain {
                                 break;
         
                             case 4:
+                                System.out.println("Seleccione el boton de la frecuencia favorita");
+                                button = scanner.nextInt();
+                                scanner.nextLine();
+
+                                System.out.println("La frecuencia es: " + radio.getFavFrequency(button));
+
+                            
+                                subContinuar = volverAlMenu(scanner, " al menú? ",radio);
+                                break;
                         
                             case 5:                
                                 System.out.println("Saliendo del programa...");

@@ -16,5 +16,5 @@ public interface IRadio{
 
     public void setFavFrequency(int button); //Guarda frecuencia
 
-    public float getFavFrequency(int button); //Llama frecuencia
+    // public float getFavFrequency(int button); //Llama frecuencia
 }

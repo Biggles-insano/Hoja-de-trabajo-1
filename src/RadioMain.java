@@ -1,7 +1,17 @@
 import java.util.Scanner;
 
+/**
+ * Clase principal para la interacción con la instancia de Radio.
+ * Esta clase contiene el método main que permite a los usuarios interactuar con un radio
+ * a través de una interfaz de texto en la consola.
+ */
 public class RadioMain {
-
+    /**
+     * Método principal que se ejecuta al iniciar el programa.
+     * Establece un menú interactivo para controlar una instancia de Radio.
+     *
+     * @param args Argumentos pasados por línea de comandos (no utilizados en este programa).
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         IRadio radio = new Radio();  // Instancia de la clase Radio
